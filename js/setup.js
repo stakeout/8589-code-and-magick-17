@@ -138,3 +138,43 @@ userDialogCloseBtn.addEventListener('keydown', function (evt) {
     closePopup();
   }
 });
+// module5
+var setupHandler = userDialog.querySelector('.upload');
+setupHandler.addEventListener('mousedown', function (evt) {
+  evt.preventDefault();
+  var startCoords = {
+    x: evt.clientX,
+    y: evt.clientY
+  };
+  var dragged = false;
+  var mouseMoveHandler = function (moveEvt) {
+    moveEvt.preventDefault();
+    dragged = true;
+    var shift = {
+      x: startCoords.x - moveEvt.clientX,
+      y: startCoords.y - moveEvt.clientY
+    };
+    startCoords = {
+      x: moveEvt.clientX,
+      y: moveEvt.clientY
+    };
+    userDialog.style.left = (userDialog.offsetLeft - shift.x) + 'px';
+    userDialog.style.top = (userDialog.offsetTop - shift.y) + 'px';
+  };
+  var mouseUpHandler = function (upEvt) {
+    upEvt.preventDefault();
+    document.removeEventListener('mousemove', mouseMoveHandler);
+    document.removeEventListener('mouseup', mouseUpHandler);
+    if (dragged) {
+      var clickPreventDefaultHandler = function (evt) {
+        evt.preventDefault();
+        setupHandler.removeEventListener('click', clickPreventDefaultHandler);
+      };
+      setupHandler.addEventListener('click', clickPreventDefaultHandler);
+    }
+  };
+  document.addEventListener('mousemove', mouseMoveHandler);
+  document.addEventListener('mouseup', mouseUpHandler);
+});
+
+
