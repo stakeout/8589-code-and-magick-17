@@ -101,6 +101,11 @@ var popupPressEscHandler = function (evt) {
   }
 };
 
+var popupDefaultCoords = {
+  x: null,
+  y: null
+};
+
 var openPopup = function () {
   userDialog.classList.remove('hidden');
   document.addEventListener('keydown', popupPressEscHandler);
@@ -113,6 +118,10 @@ var openPopup = function () {
   wizardCoat.addEventListener('click', wizardCoatClickHandler);
   wizardEyes.addEventListener('click', wizardEyesClickHandler);
   wizardFireball.addEventListener('click', wizardFireballClickHandler);
+  popupDefaultCoords = {
+    x: userDialog.offsetLeft,
+    y: userDialog.offsetTop
+  };
 };
 
 var closePopup = function () {
@@ -121,6 +130,8 @@ var closePopup = function () {
   wizardCoat.removeEventListener('click', wizardCoatClickHandler);
   wizardEyes.removeEventListener('click', wizardEyesClickHandler);
   wizardFireball.removeEventListener('click', wizardFireballClickHandler);
+  userDialog.style.left = popupDefaultCoords.x + 'px';
+  userDialog.style.top = popupDefaultCoords.y + 'px';
 };
 
 userAvatar.addEventListener('keydown', function (evt) {
@@ -166,8 +177,8 @@ setupHandler.addEventListener('mousedown', function (evt) {
     document.removeEventListener('mousemove', mouseMoveHandler);
     document.removeEventListener('mouseup', mouseUpHandler);
     if (dragged) {
-      var clickPreventDefaultHandler = function (evt) {
-        evt.preventDefault();
+      var clickPreventDefaultHandler = function (clickEvt) {
+        clickEvt.preventDefault();
         setupHandler.removeEventListener('click', clickPreventDefaultHandler);
       };
       setupHandler.addEventListener('click', clickPreventDefaultHandler);
@@ -176,5 +187,3 @@ setupHandler.addEventListener('mousedown', function (evt) {
   document.addEventListener('mousemove', mouseMoveHandler);
   document.addEventListener('mouseup', mouseUpHandler);
 });
-
-
