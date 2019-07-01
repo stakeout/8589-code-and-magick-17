@@ -1,6 +1,21 @@
 'use strict';
 (function () {
-
+  var COAT_COLOR = [
+    'rgb(101, 137, 164)',
+    'rgb(241, 43, 107)',
+    'rgb(146, 100, 161)',
+    'rgb(56, 159, 117)',
+    'rgb(215, 210, 55)',
+    'rgb(0, 0, 0)'
+  ];
+  var EYES_COLOR = ['black', 'red', 'blue', 'yellow', 'green'];
+  var FIREBALL_COLOR = [
+    '#ee4830',
+    '#30a8ee',
+    '#5ce6c0',
+    '#e848d5',
+    '#e6e848'
+  ];
   var userDialog = document.querySelector('.setup');
   var userAvatar = document.querySelector('.setup-open-icon');
   var userDialogCloseBtn = userDialog.querySelector('.setup-close');
@@ -14,19 +29,19 @@
   var wizardFireballColorInput = userSetup.querySelector('input[name="fireball-color"]');
 
   var wizardCoatClickHandler = function () {
-    var color = window.util.getRandomArrayIndex(window.util.COAT_COLOR);
+    var color = window.util.getRandomArrayIndex(COAT_COLOR);
     wizardCoat.style.fill = color;
     wizardCoatColorInput.value = color;
   };
 
   var wizardEyesClickHandler = function () {
-    var color = window.util.getRandomArrayIndex(window.util.EYES_COLOR);
+    var color = window.util.getRandomArrayIndex(EYES_COLOR);
     wizardEyes.style.fill = color;
     wizardEyesColorInput.value = color;
   };
 
   var wizardFireballClickHandler = function () {
-    var color = window.util.getRandomArrayIndex(window.util.FIREBALL_COLOR);
+    var color = window.util.getRandomArrayIndex(FIREBALL_COLOR);
     wizardFireball.style.background = color;
     wizardFireballColorInput.value = color;
   };
